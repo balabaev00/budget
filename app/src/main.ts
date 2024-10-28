@@ -1,10 +1,9 @@
+import { validatorConfig } from '@configs/validator.config';
 import { ValidationPipe, VERSION_NEUTRAL, VersioningType } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Logger } from 'nestjs-pino';
-
-import { Stage, validatorConfig } from '@r1-backend/utils';
 
 import { AppModule } from './app.module';
 
@@ -25,10 +24,10 @@ async function bootstrap(): Promise<void> {
         defaultVersion: VERSION_NEUTRAL,
     });
 
-    if (process.env.STAGE !== Stage.Production) {
+    if (process.env.STAGE !== 'production') {
         const config = new DocumentBuilder()
-            .setTitle('Esia')
-            .setDescription('Сервис для взаимодействия с госуслугами')
+            .setTitle('Budget')
+            .setDescription('Сервис для работы с бюджетами')
             .setVersion('1.0')
             .build();
 
