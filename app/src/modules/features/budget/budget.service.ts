@@ -16,4 +16,10 @@ export class BudgetService {
 
         return this.mapper.toDto(entity);
     }
+
+    async findAll(userId: string): Promise<BudgetDto[]> {
+        const entities = await this.budgetRepository.findAll(userId);
+
+        return entities.map(entity => this.mapper.toDto(entity));
+    }
 }

@@ -3,7 +3,7 @@ import { InjectEntityManager } from '@nestjs/typeorm';
 import { EntityManager } from 'typeorm';
 
 import { CreateBudgetDto } from './dto';
-import { BudgetEntity } from './entity';
+import { BudgetEntity } from './entities';
 
 @Injectable()
 export class BudgetRepository {
@@ -19,5 +19,9 @@ export class BudgetRepository {
         });
 
         return this.em.save(entity);
+    }
+
+    findAll(userId: string): Promise<BudgetEntity[]> {
+        return this.em.find(BudgetEntity, { where: { userId } });
     }
 }

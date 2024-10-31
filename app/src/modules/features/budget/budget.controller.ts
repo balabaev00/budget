@@ -1,5 +1,5 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { ApiQuery, ApiTags } from '@nestjs/swagger';
 
 import { BudgetService } from './budget.service';
 import { BudgetDto, CreateBudgetDto } from './dto';
@@ -17,5 +17,17 @@ export class BudgetController {
     @Post()
     create(@Body() dto: CreateBudgetDto): Promise<BudgetDto> {
         return this.service.create(dto);
+    }
+
+    @Get()
+    @ApiQuery({
+        name: 'userId',
+        required: true,
+        type: String,
+    })
+    findAll(
+        @Query('userId') userId: string,
+    ): Promise<BudgetDto[]> {
+        return this.service.findAll(userId);
     }
 }

@@ -2,22 +2,22 @@ import { IMapper } from '@common/interfaces';
 import { Injectable } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 
-import { BudgetDto } from '../dto';
-import { BudgetEntity } from '../entities';
+import { CategoryDto } from '../dto';
+import { CategoryEntity } from '../entities';
 
 @Injectable()
-export class BudgetMapper implements IMapper<BudgetEntity, BudgetDto> {
-    toDto(entity: BudgetEntity): BudgetDto {
+export class CategoryMapper implements IMapper<CategoryEntity, CategoryDto> {
+    toDto(entity: CategoryEntity): CategoryDto {
         return plainToInstance(
-            BudgetDto,
+            CategoryDto,
             {
-                userId: entity.userId,
+                id: entity.id,
                 name: entity.name,
-                amount: entity.amount,
+                userId: entity.userId,
                 createdAt: entity.createdAt.toISOString(),
                 updatedAt: entity.updatedAt.toISOString(),
                 deletedAt: entity.deletedAt?.toISOString(),
-            },
+            }
         );
     }
 }
